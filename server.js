@@ -42,14 +42,19 @@ app.get('/template', function(req, res){
             console.log("Result : ", data); 
         } 
     }); **/ 
-    // findbyname and update 
+    // findbyname and update
+    app.get('/update',(req,res)=>{ 
  prof.findOneAndUpdate({name:'houssem'},{age:26},{new:true},(err,docs)=>{
-     err ? console.log('something wrong !!!!') : console.log(docs)
+     err ? console.log('something wrong !!!!') : res.json(docs)
  })
+})
 // remove docs  by id
-prof.findByIdAndRemove('5f1c610faa88320bec137563',(err,docs)=>{
-err ? console.log('something wrong ??') : console.log('deleted :)')
+app.get('/deleted',(req,res)=>{
+let id ='5f1d7a88aad7c10da0b73bdf'
+prof.findByIdAndRemove(id,(err,docs)=>{
+err ? console.log('something wrong ??') : res.send(`deleted item with the ${id}`)
 })    
+})
 //remmove with condition 
 prof.remove({name:'hamma'},(err,docs)=>{
     err ? console.log('cant solve  err') : console.log(docs)
